@@ -157,7 +157,8 @@ class Embeddings(nn.Module):
 
     def forward(self, x):
         if self.hybrid:
-            x, features = self.hybrid_model(x)
+            features = None
+            x = self.hybrid_model(x)
         else:
             features = None
         x = self.patch_embeddings(x)  # (B, hidden. n_patches^(1/2), n_patches^(1/2))
