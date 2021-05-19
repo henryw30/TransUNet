@@ -145,8 +145,10 @@ class ResNetV2(nn.Module):
         x = self.root(x)
         features.append(x)
         x = nn.MaxPool2d(kernel_size=3, stride=2, padding=0)(x)
+        print(x.shape)
         for i in range(len(self.body)-1):
             x = self.body[i](x)
+            print(x.shape)
             right_size = int(in_size / 4 / (i+1))
             if x.size()[2] != right_size:
                 pad = right_size - x.size()[2]
@@ -156,5 +158,6 @@ class ResNetV2(nn.Module):
             else:
                 feat = x
             features.append(feat)
+        print(x.shape)
         x = self.body[-1](x)
         return x, features[::-1]
