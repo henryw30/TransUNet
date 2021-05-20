@@ -140,12 +140,14 @@ class ResNetV2(nn.Module):
         ]))
 
     def forward(self, x):
+        print("2: ", x.shape)
         features = []
         b, c, in_size, _ = x.size()
         x = self.root(x)
+        print("2.5: ", x.shape)
         features.append(x)
         x = nn.MaxPool2d(kernel_size=3, stride=2, padding=0)(x)
-        print(x.shape)
+        print("3: ", x.shape)
         for i in range(len(self.body)-1):
             x = self.body[i](x)
             print(x.shape)
@@ -158,6 +160,7 @@ class ResNetV2(nn.Module):
             else:
                 feat = x
             features.append(feat)
-        print(x.shape)
+        print("4: ", x.shape)
         x = self.body[-1](x)
+        print("5: ", x.shape)
         return x, features[::-1]
