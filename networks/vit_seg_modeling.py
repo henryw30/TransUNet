@@ -324,6 +324,7 @@ class DecoderBlock(nn.Module):
         x = self.up(x)
         print("d2 ", x.shape)
         if skip is not None:
+            print("d2.2 ", skip.shape)
             x = torch.cat([x, skip], dim=1)
             print("d3 ", x.shape)
         x = self.conv1(x)
