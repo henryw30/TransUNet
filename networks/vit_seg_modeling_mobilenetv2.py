@@ -142,7 +142,7 @@ class MobileNetV2(nn.Module):
         temp = x.flatten(2)
         temp = temp.transpose(-1, -2)
         print("1.3: ", temp.shape)
-        temp = nn.functional.avg_pool1d(temp, 768, stride=1)
+        temp = nn.functional.avg_pool1d(temp, 769, stride=1)
         temp = temp.transpose(-1, -2)
         temp = temp.unflatten(2, (8, 8))
         print("1.4: ", temp.shape)
