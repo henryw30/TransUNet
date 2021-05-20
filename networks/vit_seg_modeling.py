@@ -320,11 +320,16 @@ class DecoderBlock(nn.Module):
         self.up = nn.UpsamplingBilinear2d(scale_factor=2)
 
     def forward(self, x, skip=None):
+        print("d1 ", x.shape)
         x = self.up(x)
+        print("d2 ", x.shape)
         if skip is not None:
             x = torch.cat([x, skip], dim=1)
+            print("d3 ", x.shape)
         x = self.conv1(x)
+        print("d4 ", x.shape)
         x = self.conv2(x)
+        print("d5 ", x.shape)
         return x
 
 
