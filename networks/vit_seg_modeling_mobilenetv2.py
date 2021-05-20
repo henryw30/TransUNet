@@ -140,8 +140,7 @@ class MobileNetV2(nn.Module):
         x = self.conv(x)
         print("1.2: ", x.shape)
         skip_feeder.append(x)
-        x = self.avgpool(x)
-        print("1.3: ", x.shape)
+        #x = self.avgpool(x)
         #x = x.view(x.size(0), -1)
         #x = self.classifier(x)
         return x, skip_feeder[::-1]

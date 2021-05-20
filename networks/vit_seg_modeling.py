@@ -132,8 +132,10 @@ class Embeddings(nn.Module):
         if config.patches.get("grid") is not None:   # ResNet
             grid_size = config.patches["grid"]
             patch_size = (img_size[0] // 16 // grid_size[0], img_size[1] // 16 // grid_size[1])
-            patch_size_real = (patch_size[0] * 16, patch_size[1] * 16)
-            n_patches = (img_size[0] // patch_size_real[0]) * (img_size[1] // patch_size_real[1])  
+            
+            #patch_size_real = (patch_size[0] * 16, patch_size[1] * 16)
+            #n_patches = (img_size[0] // patch_size_real[0]) * (img_size[1] // patch_size_real[1])
+            n_patches = 1024
             self.hybrid = True
         else:
             patch_size = _pair(config.patches["size"])
@@ -142,7 +144,7 @@ class Embeddings(nn.Module):
 
         if self.hybrid:
             self.hybrid_model = MobileNetV2(num_classes=config.n_classes)
-            in_channels = 333 # (widthfactor=1) * 16 * 64
+            in_channels = 1280 # (widthfactor=1) * 16 * 64
             # self.hybrid_model = ResNetV2(block_units=config.resnet.num_layers, width_factor=config.resnet.width_factor)
             #in_channels = self.hybrid_model.width * 16
 
