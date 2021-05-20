@@ -132,7 +132,7 @@ class Embeddings(nn.Module):
         if config.patches.get("grid") is not None:   # ResNet
             grid_size = config.patches["grid"]
             patch_size = (img_size[0] // 16 // grid_size[0], img_size[1] // 16 // grid_size[1])
-            
+
             #patch_size_real = (patch_size[0] * 16, patch_size[1] * 16)
             #n_patches = (img_size[0] // patch_size_real[0]) * (img_size[1] // patch_size_real[1])
             n_patches = 1024
@@ -167,10 +167,14 @@ class Embeddings(nn.Module):
         x = self.patch_embeddings(x)  # (B, hidden. n_patches^(1/2), n_patches^(1/2))
         print("3: ", x.shape)
         x = x.flatten(2)
+        print("4: ", x.shape)
         x = x.transpose(-1, -2)  # (B, n_patches, hidden)
+        print("5: ", x.shape)
 
         embeddings = x + self.position_embeddings
+        print("6: ", embeddings.shape)
         embeddings = self.dropout(embeddings)
+        print("7: ", embeddings.shape)
         return embeddings, features
 
 
