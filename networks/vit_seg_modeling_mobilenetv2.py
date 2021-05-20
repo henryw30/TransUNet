@@ -123,8 +123,9 @@ class MobileNetV2(nn.Module):
         # building last several layers
         output_channel = _make_divisible(1280 * width_mult, 4 if width_mult == 0.1 else 8) if width_mult > 1.0 else 1280
         self.conv = conv_1x1_bn(input_channel, output_channel)
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        #self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         #self.classifier = nn.Linear(output_channel, num_classes)
+        self.up = nn.UpsamplingBilinear2d(scale_factor=2)
 
         self._initialize_weights()
 
@@ -154,6 +155,8 @@ class MobileNetV2(nn.Module):
         #x = self.avgpool(x)
         #x = x.view(x.size(0), -1)
         #x = self.classifier(x)
+        x = self.up(x)
+        print("1.3: ", x.shape)
         return x, skip_feeder[::-1]
 
     def _initialize_weights(self):
