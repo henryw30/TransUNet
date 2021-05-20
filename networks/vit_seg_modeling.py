@@ -142,7 +142,7 @@ class Embeddings(nn.Module):
 
         if self.hybrid:
             self.hybrid_model = MobileNetV2(num_classes=config.n_classes)
-            in_channels = 1024 # (widthfactor=1) * 16 * 64
+            in_channels = 333 # (widthfactor=1) * 16 * 64
             # self.hybrid_model = ResNetV2(block_units=config.resnet.num_layers, width_factor=config.resnet.width_factor)
             #in_channels = self.hybrid_model.width * 16
 

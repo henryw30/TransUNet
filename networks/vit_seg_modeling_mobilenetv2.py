@@ -130,14 +130,18 @@ class MobileNetV2(nn.Module):
 
     def forward(self, x):
         skip_feeder = []
+        print("1.1: ", x.shape)
         for i in range(len(self.features)):
             x = self.features[i](x)
+            print(x.shape)
             skip_feeder.append(x)
 
         #x = self.features(x)
         x = self.conv(x)
+        print("1.2: ", x.shape)
         skip_feeder.append(x)
         x = self.avgpool(x)
+        print("1.3: ", x.shape)
         #x = x.view(x.size(0), -1)
         #x = self.classifier(x)
         return x, skip_feeder[::-1]
