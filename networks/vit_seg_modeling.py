@@ -135,7 +135,7 @@ class Embeddings(nn.Module):
 
             #patch_size_real = (patch_size[0] * 16, patch_size[1] * 16)
             #n_patches = (img_size[0] // patch_size_real[0]) * (img_size[1] // patch_size_real[1])
-            n_patches = 1024
+            n_patches = 64
             self.hybrid = True
         else:
             patch_size = _pair(config.patches["size"])
