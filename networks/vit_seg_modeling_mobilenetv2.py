@@ -129,12 +129,18 @@ class MobileNetV2(nn.Module):
         self._initialize_weights()
 
     def forward(self, x):
-        x = self.features(x)
+        skip_feeder = []
+        for i in range(len(self.features)):
+            x = self.features[i](x)
+            skip_feeder.append(x)
+
+        #x = self.features(x)
         x = self.conv(x)
+        skip_feeder.append(x)
         x = self.avgpool(x)
         #x = x.view(x.size(0), -1)
         #x = self.classifier(x)
-        return x
+        return x, skip_feeder[::-1]
 
     def _initialize_weights(self):
         for m in self.modules():

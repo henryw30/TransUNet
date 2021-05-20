@@ -142,7 +142,7 @@ class Embeddings(nn.Module):
 
         if self.hybrid:
             self.hybrid_model = MobileNetV2(num_classes=config.n_classes)
-            in_channels = 1280
+            in_channels = 1024 # (widthfactor=1) * 16 * 64
             # self.hybrid_model = ResNetV2(block_units=config.resnet.num_layers, width_factor=config.resnet.width_factor)
             #in_channels = self.hybrid_model.width * 16
 
@@ -156,12 +156,14 @@ class Embeddings(nn.Module):
 
 
     def forward(self, x):
+        print("1: ", x.shape)
         if self.hybrid:
-            features = None
-            x = self.hybrid_model(x)
+            x, features = self.hybrid_model(x)
         else:
             features = None
+        print("2: ", x.shape)
         x = self.patch_embeddings(x)  # (B, hidden. n_patches^(1/2), n_patches^(1/2))
+        print("3: ", x.shape)
         x = x.flatten(2)
         x = x.transpose(-1, -2)  # (B, n_patches, hidden)
 
