@@ -158,23 +158,23 @@ class Embeddings(nn.Module):
 
 
     def forward(self, x):
-        print("1: ", x.shape)
+        #print("1: ", x.shape)
         if self.hybrid:
             x, features = self.hybrid_model(x)
         else:
             features = None
-        print("2: ", x.shape)
+        #print("2: ", x.shape)
         x = self.patch_embeddings(x)  # (B, hidden. n_patches^(1/2), n_patches^(1/2))
-        print("3: ", x.shape)
+        #print("3: ", x.shape)
         x = x.flatten(2)
-        print("4: ", x.shape)
+        #print("4: ", x.shape)
         x = x.transpose(-1, -2)  # (B, n_patches, hidden)
-        print("5: ", x.shape)
+        #print("5: ", x.shape)
 
         embeddings = x + self.position_embeddings
-        print("6: ", embeddings.shape)
+        #print("6: ", embeddings.shape)
         embeddings = self.dropout(embeddings)
-        print("7: ", embeddings.shape)
+        #print("7: ", embeddings.shape)
         return embeddings, features
 
 
@@ -320,17 +320,17 @@ class DecoderBlock(nn.Module):
         self.up = nn.UpsamplingBilinear2d(scale_factor=2)
 
     def forward(self, x, skip=None):
-        print("d1 ", x.shape)
+        #print("d1 ", x.shape)
         x = self.up(x)
-        print("d2 ", x.shape)
+        #print("d2 ", x.shape)
         if skip is not None:
-            print("d2.2 ", skip.shape)
+            #print("d2.2 ", skip.shape)
             x = torch.cat([x, skip], dim=1)
-            print("d3 ", x.shape)
+            #print("d3 ", x.shape)
         x = self.conv1(x)
-        print("d4 ", x.shape)
+        #print("d4 ", x.shape)
         x = self.conv2(x)
-        print("d5 ", x.shape)
+        #print("d5 ", x.shape)
         return x
 
 

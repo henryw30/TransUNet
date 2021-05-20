@@ -132,7 +132,7 @@ class MobileNetV2(nn.Module):
     def forward(self, x):
         stage_num = [1, 3, 6]
         skip_feeder = []
-        print("1.1: ", x.shape)
+        #print("1.1: ", x.shape)
         for i in range(len(self.features)):
             x = self.features[i](x)
             if i in stage_num:
@@ -142,7 +142,7 @@ class MobileNetV2(nn.Module):
 
         #x = self.features(x)
         x = self.conv(x)
-        print("1.2: ", x.shape)
+        #print("1.2: ", x.shape)
         # temp = x.flatten(2)
         # temp = temp.transpose(-1, -2)
         # print("1.3: ", temp.shape)
@@ -156,7 +156,7 @@ class MobileNetV2(nn.Module):
         #x = x.view(x.size(0), -1)
         #x = self.classifier(x)
         x = self.up(x)
-        print("1.3: ", x.shape)
+        #print("1.3: ", x.shape)
         return x, skip_feeder[::-1]
 
     def _initialize_weights(self):
