@@ -136,9 +136,9 @@ class MobileNetV2(nn.Module):
         for i in range(len(self.features)):
             x = self.features[i](x)
             if i in stage_num:
-                temp = nn.functional.avg_pool2d(x, 2, stride=2)
-                print(temp.shape)
-                skip_feeder.append(temp)
+                #temp = nn.functional.avg_pool2d(x, 2, stride=2)
+                #print(temp.shape)
+                skip_feeder.append(x)
 
         #x = self.features(x)
         x = self.conv(x)
