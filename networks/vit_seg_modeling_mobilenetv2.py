@@ -129,25 +129,26 @@ class MobileNetV2(nn.Module):
         self._initialize_weights()
 
     def forward(self, x):
+        stage_num = [1, 3, 6]
         skip_feeder = []
         print("1.1: ", x.shape)
         for i in range(len(self.features)):
             x = self.features[i](x)
-            print(x.shape)
-            skip_feeder.append(x)
+            if i in stage_num:
+                print(x.shape)
+                skip_feeder.append(x)
 
         #x = self.features(x)
         x = self.conv(x)
         print("1.2: ", x.shape)
-        temp = x.flatten(2)
-        temp = temp.transpose(-1, -2)
-        print("1.3: ", temp.shape)
-        temp = nn.functional.avg_pool1d(temp, 769, stride=1)
-        temp = temp.transpose(-1, -2)
-        temp = temp.unflatten(2, (8, 8))
-        print("1.4: ", temp.shape)
-
-        skip_feeder.append(temp)
+        # temp = x.flatten(2)
+        # temp = temp.transpose(-1, -2)
+        # print("1.3: ", temp.shape)
+        # temp = nn.functional.avg_pool1d(temp, 769, stride=1)
+        # temp = temp.transpose(-1, -2)
+        # temp = temp.unflatten(2, (8, 8))
+        # print("1.4: ", temp.shape)
+        # skip_feeder.append(temp)
         # skip_feeder.append(x)
         #x = self.avgpool(x)
         #x = x.view(x.size(0), -1)
