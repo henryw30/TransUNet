@@ -206,7 +206,7 @@ def mobilenet_v2(pretrained=True):
                     own_state['conv.1.running_var'].copy_(param.data)
                 else:
                     continue
-            if isinstance(param, Parameter):
+            if isinstance(param, torch.nn.parameter.Parameter):
                 # backwards compatibility for serialized parameters
                 param = param.data
                 own_state[name].copy_(param)
