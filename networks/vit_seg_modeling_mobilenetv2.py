@@ -184,6 +184,10 @@ def mobilenet_v2(pretrained=True):
             from torch.utils.model_zoo import load_url as load_state_dict_from_url
         state_dict = load_state_dict_from_url(
             'https://www.dropbox.com/s/47tyzpofuuyyv1b/mobilenetv2_1.0-f2a8633.pth.tar?dl=1', progress=True)
+
+
+        print(state_dict)
+        print(model)  
         model.load_state_dict(state_dict)
     return model
 
