@@ -186,8 +186,74 @@ def mobilenet_v2(pretrained=True):
             'https://www.dropbox.com/s/47tyzpofuuyyv1b/mobilenetv2_1.0-f2a8633.pth.tar?dl=1', progress=True)
 
 
-        print(state_dict.keys())
-        print(model)  
+        # print(state_dict.keys())
+        # for key, val in state_dict.items():
+        #     for layer in model.children():
+        #         print(layer)
+        for uname, unit in model.named_children():
+            print(uname)
+            print(unit)
+
+        for layer in model.children():
+            print(layer)
+
+
+        # print(model)
+        # dict_keys(['features.0.0.weight', 'features.0.1.weight', 'features.0.1.bias', 'features.0.1.running_mean', 
+        # 'features.0.1.running_var', 'features.1.conv.0.weight', 'features.1.conv.1.weight', 'features.1.conv.1.bias', 
+        # 'features.1.conv.1.running_mean', 'features.1.conv.1.running_var', 'features.1.conv.3.weight', 'features.1.conv.4.weight', 
+        # 'features.1.conv.4.bias', 'features.1.conv.4.running_mean', 'features.1.conv.4.running_var', 'features.2.conv.0.weight', 
+        # 'features.2.conv.1.weight', 'features.2.conv.1.bias', 'features.2.conv.1.running_mean', 'features.2.conv.1.running_var', 
+        # 'features.2.conv.3.weight', 'features.2.conv.4.weight', 'features.2.conv.4.bias', 'features.2.conv.4.running_mean', 
+        # 'features.2.conv.4.running_var', 'features.2.conv.6.weight', 'features.2.conv.7.weight', 'features.2.conv.7.bias', 
+        # 'features.2.conv.7.running_mean', 'features.2.conv.7.running_var', 'features.3.conv.0.weight', 'features.3.conv.1.weight', 
+        # 'features.3.conv.1.bias', 'features.3.conv.1.running_mean', 'features.3.conv.1.running_var', 'features.3.conv.3.weight', 
+        # 'features.3.conv.4.weight', 'features.3.conv.4.bias', 'features.3.conv.4.running_mean', 'features.3.conv.4.running_var', 'features.3.conv.6.weight', 
+        # 'features.3.conv.7.weight', 'features.3.conv.7.bias', 'features.3.conv.7.running_mean', 'features.3.conv.7.running_var', 'features.4.conv.0.weight', 
+        # 'features.4.conv.1.weight', 'features.4.conv.1.bias', 'features.4.conv.1.running_mean', 'features.4.conv.1.running_var', 'features.4.conv.3.weight', 
+        # 'features.4.conv.4.weight', 'features.4.conv.4.bias', 'features.4.conv.4.running_mean', 'features.4.conv.4.running_var', 'features.4.conv.6.weight', 
+        # 'features.4.conv.7.weight', 'features.4.conv.7.bias', 'features.4.conv.7.running_mean', 'features.4.conv.7.running_var', 'features.5.conv.0.weight', 
+        # 'features.5.conv.1.weight', 'features.5.conv.1.bias', 'features.5.conv.1.running_mean', 'features.5.conv.1.running_var', 'features.5.conv.3.weight', 
+        # 'features.5.conv.4.weight', 'features.5.conv.4.bias', 'features.5.conv.4.running_mean', 'features.5.conv.4.running_var', 'features.5.conv.6.weight', 
+        # 'features.5.conv.7.weight', 'features.5.conv.7.bias', 'features.5.conv.7.running_mean', 'features.5.conv.7.running_var', 'features.6.conv.0.weight', 
+        # 'features.6.conv.1.weight', 'features.6.conv.1.bias', 'features.6.conv.1.running_mean', 'features.6.conv.1.running_var', 'features.6.conv.3.weight', 
+        # 'features.6.conv.4.weight', 'features.6.conv.4.bias', 'features.6.conv.4.running_mean', 'features.6.conv.4.running_var', 'features.6.conv.6.weight', 
+        # 'features.6.conv.7.weight', 'features.6.conv.7.bias', 'features.6.conv.7.running_mean', 'features.6.conv.7.running_var', 'features.7.conv.0.weight', 
+        # 'features.7.conv.1.weight', 'features.7.conv.1.bias', 'features.7.conv.1.running_mean', 'features.7.conv.1.running_var', 'features.7.conv.3.weight', 
+        # 'features.7.conv.4.weight', 'features.7.conv.4.bias', 'features.7.conv.4.running_mean', 'features.7.conv.4.running_var', 'features.7.conv.6.weight', 
+        # 'features.7.conv.7.weight', 'features.7.conv.7.bias', 'features.7.conv.7.running_mean', 'features.7.conv.7.running_var', 'features.8.conv.0.weight', 
+        # 'features.8.conv.1.weight', 'features.8.conv.1.bias', 'features.8.conv.1.running_mean', 'features.8.conv.1.running_var', 'features.8.conv.3.weight', 
+        # 'features.8.conv.4.weight', 'features.8.conv.4.bias', 'features.8.conv.4.running_mean', 'features.8.conv.4.running_var', 'features.8.conv.6.weight', 
+        # 'features.8.conv.7.weight', 'features.8.conv.7.bias', 'features.8.conv.7.running_mean', 'features.8.conv.7.running_var', 'features.9.conv.0.weight', 
+        # 'features.9.conv.1.weight', 'features.9.conv.1.bias', 'features.9.conv.1.running_mean', 'features.9.conv.1.running_var', 'features.9.conv.3.weight', 
+        # 'features.9.conv.4.weight', 'features.9.conv.4.bias', 'features.9.conv.4.running_mean', 'features.9.conv.4.running_var', 'features.9.conv.6.weight', 
+        # 'features.9.conv.7.weight', 'features.9.conv.7.bias', 'features.9.conv.7.running_mean', 'features.9.conv.7.running_var', 'features.10.conv.0.weight', 
+        # 'features.10.conv.1.weight', 'features.10.conv.1.bias', 'features.10.conv.1.running_mean', 'features.10.conv.1.running_var', 'features.10.conv.3.weight', 
+        # 'features.10.conv.4.weight', 'features.10.conv.4.bias', 'features.10.conv.4.running_mean', 'features.10.conv.4.running_var', 'features.10.conv.6.weight', 
+        # 'features.10.conv.7.weight', 'features.10.conv.7.bias', 'features.10.conv.7.running_mean', 'features.10.conv.7.running_var', 'features.11.conv.0.weight', 
+        # 'features.11.conv.1.weight', 'features.11.conv.1.bias', 'features.11.conv.1.running_mean', 'features.11.conv.1.running_var', 'features.11.conv.3.weight', 
+        # 'features.11.conv.4.weight', 'features.11.conv.4.bias', 'features.11.conv.4.running_mean', 'features.11.conv.4.running_var', 'features.11.conv.6.weight', 
+        # 'features.11.conv.7.weight', 'features.11.conv.7.bias', 'features.11.conv.7.running_mean', 'features.11.conv.7.running_var', 'features.12.conv.0.weight', 
+        # 'features.12.conv.1.weight', 'features.12.conv.1.bias', 'features.12.conv.1.running_mean', 'features.12.conv.1.running_var', 'features.12.conv.3.weight', 
+        # 'features.12.conv.4.weight', 'features.12.conv.4.bias', 'features.12.conv.4.running_mean', 'features.12.conv.4.running_var', 'features.12.conv.6.weight', 
+        # 'features.12.conv.7.weight', 'features.12.conv.7.bias', 'features.12.conv.7.running_mean', 'features.12.conv.7.running_var', 'features.13.conv.0.weight', 
+        # 'features.13.conv.1.weight', 'features.13.conv.1.bias', 'features.13.conv.1.running_mean', 'features.13.conv.1.running_var', 'features.13.conv.3.weight', 
+        # 'features.13.conv.4.weight', 'features.13.conv.4.bias', 'features.13.conv.4.running_mean', 'features.13.conv.4.running_var', 'features.13.conv.6.weight', 
+        # 'features.13.conv.7.weight', 'features.13.conv.7.bias', 'features.13.conv.7.running_mean', 'features.13.conv.7.running_var', 'features.14.conv.0.weight', 
+        # 'features.14.conv.1.weight', 'features.14.conv.1.bias', 'features.14.conv.1.running_mean', 'features.14.conv.1.running_var', 'features.14.conv.3.weight', 
+        # 'features.14.conv.4.weight', 'features.14.conv.4.bias', 'features.14.conv.4.running_mean', 'features.14.conv.4.running_var', 'features.14.conv.6.weight', 
+        # 'features.14.conv.7.weight', 'features.14.conv.7.bias', 'features.14.conv.7.running_mean', 'features.14.conv.7.running_var', 'features.15.conv.0.weight', 
+        # 'features.15.conv.1.weight', 'features.15.conv.1.bias', 'features.15.conv.1.running_mean', 'features.15.conv.1.running_var', 'features.15.conv.3.weight', 
+        # 'features.15.conv.4.weight', 'features.15.conv.4.bias', 'features.15.conv.4.running_mean', 'features.15.conv.4.running_var', 'features.15.conv.6.weight', 
+        # 'features.15.conv.7.weight', 'features.15.conv.7.bias', 'features.15.conv.7.running_mean', 'features.15.conv.7.running_var', 'features.16.conv.0.weight', 
+        # 'features.16.conv.1.weight', 'features.16.conv.1.bias', 'features.16.conv.1.running_mean', 'features.16.conv.1.running_var', 'features.16.conv.3.weight', 
+        # 'features.16.conv.4.weight', 'features.16.conv.4.bias', 'features.16.conv.4.running_mean', 'features.16.conv.4.running_var', 'features.16.conv.6.weight', 
+        # 'features.16.conv.7.weight', 'features.16.conv.7.bias', 'features.16.conv.7.running_mean', 'features.16.conv.7.running_var', 'features.17.conv.0.weight', 
+        # 'features.17.conv.1.weight', 'features.17.conv.1.bias', 'features.17.conv.1.running_mean', 'features.17.conv.1.running_var', 'features.17.conv.3.weight', 
+        # 'features.17.conv.4.weight', 'features.17.conv.4.bias', 'features.17.conv.4.running_mean', 'features.17.conv.4.running_var', 'features.17.conv.6.weight', 
+        # 'features.17.conv.7.weight', 'features.17.conv.7.bias', 'features.17.conv.7.running_mean', 'features.17.conv.7.running_var', 'features.18.0.weight', 'features.18.1.weight', 
+        # 'features.18.1.bias', 'features.18.1.running_mean', 'features.18.1.running_var', 'classifier.weight', 'classifier.bias'])
+
         model.load_state_dict(state_dict)
     return model
 
