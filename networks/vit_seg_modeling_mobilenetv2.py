@@ -186,14 +186,9 @@ def mobilenet_v2(pretrained=True):
             'https://www.dropbox.com/s/47tyzpofuuyyv1b/mobilenetv2_1.0-f2a8633.pth.tar?dl=1', progress=True)
 
 
-        # print(state_dict.keys())
-        # for key, val in state_dict.items():
-        #     for layer in model.children():
-        #         print(layer)
         own_state = model.state_dict()
         for name, param in state_dict.items():
             if name not in own_state:
-                print(name)
                 if name == 'features.18.0.weight':
                     own_state['conv.0.weight'].copy_(param.data)
                 elif name == 'features.18.1.weight':
@@ -210,19 +205,6 @@ def mobilenet_v2(pretrained=True):
                 # backwards compatibility for serialized parameters
                 param = param.data
                 own_state[name].copy_(param)
-
-
-        # for uname, unit in model.named_children():
-
-        #     if uname == 'conv':
-        #         uname.weight.copy_(conv1_weight)
-
-        #     print(uname)
-        #     print(unit)
-
-        # for layer in model.children():
-        #     print(layer)
-
 
         # print(model)
         # dict_keys(['features.0.0.weight', 'features.0.1.weight', 'features.0.1.bias', 'features.0.1.running_mean', 
@@ -280,7 +262,6 @@ def mobilenet_v2(pretrained=True):
         # 'features.17.conv.7.weight', 'features.17.conv.7.bias', 'features.17.conv.7.running_mean', 'features.17.conv.7.running_var', 'features.18.0.weight', 'features.18.1.weight', 
         # 'features.18.1.bias', 'features.18.1.running_mean', 'features.18.1.running_var', 'classifier.weight', 'classifier.bias'])
 
-        #model.load_state_dict(state_dict)
     return model
 
 # def mobilenetv2(**kwargs):
