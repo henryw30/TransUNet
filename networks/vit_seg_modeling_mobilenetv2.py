@@ -280,7 +280,7 @@ def mobilenet_v2(pretrained=True):
         # 'features.17.conv.7.weight', 'features.17.conv.7.bias', 'features.17.conv.7.running_mean', 'features.17.conv.7.running_var', 'features.18.0.weight', 'features.18.1.weight', 
         # 'features.18.1.bias', 'features.18.1.running_mean', 'features.18.1.running_var', 'classifier.weight', 'classifier.bias'])
 
-        model.load_state_dict(state_dict)
+        #model.load_state_dict(state_dict)
     return model
 
 # def mobilenetv2(**kwargs):
