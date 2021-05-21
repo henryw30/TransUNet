@@ -18,7 +18,8 @@ from torch.nn.modules.utils import _pair
 from scipy import ndimage
 from . import vit_seg_configs as configs
 #from .vit_seg_modeling_resnet_skip import ResNetV2
-from .vit_seg_modeling_mobilenetv2 import MobileNetV2
+#from .vit_seg_modeling_mobilenetv2 import MobileNetV2
+from .vit_seg_modeling_mobilenetv2 import mobilenet_v2
 
 
 logger = logging.getLogger(__name__)
@@ -143,7 +144,7 @@ class Embeddings(nn.Module):
             self.hybrid = False
 
         if self.hybrid:
-            self.hybrid_model = MobileNetV2(num_classes=config.n_classes)
+            self.hybrid_model = mobilenet_v2()
             in_channels = 1280 # (widthfactor=1) * 16 * 64
             # self.hybrid_model = ResNetV2(block_units=config.resnet.num_layers, width_factor=config.resnet.width_factor)
             #in_channels = self.hybrid_model.width * 16
