@@ -190,12 +190,38 @@ def mobilenet_v2(pretrained=True):
         # for key, val in state_dict.items():
         #     for layer in model.children():
         #         print(layer)
-        for uname, unit in model.named_children():
-            print(uname)
-            print(unit)
+        own_state = model.state_dict()
+        for name, param in state_dict.items():
+            if name not in own_state:
+                print(name)
+                if name == 'features.18.0.weight':
+                    own_state['conv.0.weight'].copy_(param.data)
+                elif name == 'features.18.1.weight':
+                    own_state['conv.1.weight'].copy_(param.data)
+                elif name == 'features.18.1.bias':
+                    own_state['conv.1.bias'].copy_(param.data)
+                elif name == 'features.18.1.running_mean':
+                    own_state['conv.1.running_mean'].copy_(param.data)
+                elif name == 'features.18.1.running_var':
+                    own_state['conv.1.running_var'].copy_(param.data)
+                else:
+                    continue
+            if isinstance(param, Parameter):
+                # backwards compatibility for serialized parameters
+                param = param.data
+                own_state[name].copy_(param)
 
-        for layer in model.children():
-            print(layer)
+
+        # for uname, unit in model.named_children():
+
+        #     if uname == 'conv':
+        #         uname.weight.copy_(conv1_weight)
+
+        #     print(uname)
+        #     print(unit)
+
+        # for layer in model.children():
+        #     print(layer)
 
 
         # print(model)
