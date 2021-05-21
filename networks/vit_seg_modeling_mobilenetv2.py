@@ -186,7 +186,7 @@ def mobilenet_v2(pretrained=True):
             'https://www.dropbox.com/s/47tyzpofuuyyv1b/mobilenetv2_1.0-f2a8633.pth.tar?dl=1', progress=True)
 
 
-        print(state_dict)
+        print(state_dict.keys())
         print(model)  
         model.load_state_dict(state_dict)
     return model
